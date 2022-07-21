@@ -15,7 +15,10 @@ while customer:
     elif drink_order == "report":
         coffee_machine.report()
         coin_machine.report()
-    elif coffee_machine.is_resource_sufficient(menu.find_drink(drink_order)):
-        cost = menu.find_drink(drink_order).cost
-        coin_machine.make_payment(cost)
-        coffee_machine.make_coffee(menu.find_drink(drink_order))
+    else:
+        drink = menu.find_drink(drink_order)
+        if coffee_machine.is_resource_sufficient(drink) and coin_machine.make_payment(drink.cost):
+            coffee_machine.make_coffee(drink)
+
+
+
